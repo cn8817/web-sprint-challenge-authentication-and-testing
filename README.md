@@ -13,8 +13,6 @@ You are not allowed to collaborate during the sprint challenge.
 - [ ] Run `npm install` to install your dependencies.
 - [ ] Run tests locally executing `npm test`.
 
-For a step-by-step on setting up Codegrade see [this guide.](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374)
-
 ## Project Instructions
 
 Dad jokes are all the rage these days! In this challenge, you will build a real wise-guy application.
@@ -45,7 +43,7 @@ Your finished project must include all of the following requirements (further in
  
 ## Submission format
 
-- [ ] Submit via Codegrade by pushing commits to your `<firstName-lastName>` branch on Github.
+- [ ] Submit via Codegrade by pushing commits to your `main` branch on Github.
 - [ ] Check Codegrade before the deadline to compare its results against your local tests.
 - [ ] Check Codegrade on the days following the Sprint Challenge for reviewer feedback.
 - [ ] New commits will be evaluated by Codegrade if pushed _before_ the sprint challenge deadline.
