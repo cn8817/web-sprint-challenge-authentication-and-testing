@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../users/user-model')
 
 router.post('/register', (req, res, next) => {
-  res.end('implement register, please!');
+  // res.end('implement register, please!');
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -34,7 +34,7 @@ router.post('/register', (req, res, next) => {
  const { username, password } = req.body
  const {id} = req
  const hash = bcrypt.hashSync(password, 8)
- User.add({ username, password: hash})
+ User.add({ username, password: hash, id})
  .then(newUser => {
    res.status(201).json(newUser)
  })
@@ -42,7 +42,7 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res) => {
-  res.end('implement login, please!');
+  // res.end('implement login, please!');
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -69,7 +69,7 @@ router.post('/login', (req, res) => {
       if(bcrypt.compareSync(req.body.password, req.user.password)) {
         const token = buildToken(req.user)
         res.json({message: `welcome, ${req.user.username}`, token})
-      } else if(bcrypt.compareSync(password, req.user.password === '')) {
+      } else if(req.user.password === '' || req.user.username === '') {
         res.status(422).json({message: 'username and password required'})
       } else {
         res.status(401).json({message: 'invalid credentials'})
