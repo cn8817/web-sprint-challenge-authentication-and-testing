@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {JWT_SECRET} = require('../secrets/index')
+const {JWT_SECRET} = require('../secret/index')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const Jokes = require('../jokes/jokes-model')
@@ -28,14 +28,20 @@ router.post('/register', checkUsernameFree,missingField,(req, res, next) => {
     4- On FAILED registration due to the `username` being taken,
       the response body should include a string exactly as follows: "username taken".
   */
-  const {username,password} = req.body
-  const hash = bcrypt.hashSync(password,8)
-  Jokes.add({username, password:hash})
-  .then(register => {
-    res.status(201).json(register)
-  })
-  .catch(next)
-});
+ const { username, password } = req.body
+ const {id} = req
+ const hash = bcrypt.hashSync(password, 8)
+ if(!username || !password) {
+  res.status(422).json({message: 'username and password required'})
+} else {
+ User.add({ username, password: hash, id})
+ .then(newUser => {
+   res.status(201).json(newUser)
+ })
+.catch(next)
+}
+})
+
 
 router.post('/login', checkUsernameExists,missingField,(req, res, next) => {
   // res.end('implement login, please!');
@@ -75,7 +81,6 @@ router.post('/login', checkUsernameExists,missingField,(req, res, next) => {
         .catch(next);
 });
 
-
 function makeToken(user) {
   const payload = {
     subject:user.id,
@@ -86,6 +91,5 @@ function makeToken(user) {
   }
   return jwt.sign(payload,JWT_SECRET,options)
 }
-
 
 module.exports = router;
